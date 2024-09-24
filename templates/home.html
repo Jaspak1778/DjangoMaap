@@ -1,0 +1,58 @@
+<!-- templates/home.html (kotisivu joka renderöidään base.html:nnään)-->
+
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+<div class="row">
+<div class="col-sm">
+  <h2>Tervetuloa Maalaispalstalle!</h2>
+</div>
+        <div class="col-sm-7">
+            <!-- Search Form -->
+            <form method="get" action="{% url 'home' %}" class="form-inline">
+              {{ search_form }}
+              <button type="submit" class="btn btn-primary">Haku</button>
+            </form>
+          </div>            
+  <hr>
+</div>
+</div>
+
+
+
+  <p></p>
+  
+  {% for ad in ads %}
+  <div>
+    <p></p>
+    <div class="row">
+      <div class="col-sm-6">
+    <div class="card" style="width: 45rem;">
+      
+      <div class=" row card-body font1">
+        <div class="col-sm-6">
+	    <h3 class="card-title">{{ ad.title }}</h3>
+      <p class="card-text">{{ ad.description }}</p>
+      <p class="card-text"> {{ ad.contact_info }}</p>
+      <hr>
+      <p class="card-text"> {{ ad.price }} €</p>
+      <hr>
+    
+      </div>
+      
+      {% if ad.image %}
+      <img class="card-img-top col-sm-6" style="border-left:1px solid #000;height:auto" src="{{ ad.image.url }}" alt="Card image cap">
+    {% else %}
+      <p>No image available</p>
+    {% endif %}
+    
+      <p class="textv1">Ilmoittaja {{ ad.user.username }} Luotu {{ ad.created_at }}</p>
+      
+    </div>
+
+    </div>
+  </div>
+  {% endfor %}
+
+
+{% endblock %}

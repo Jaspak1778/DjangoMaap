@@ -1,0 +1,18 @@
+<!---Kirjautumis sivun base tai ns 'layout'-->
+{% extends "base.html" %}
+
+{% block content %}
+
+    <center>
+    <h2>Kirjaudu sisään</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <div class="buttongroup margins2">
+        <button class="btn btn-primary btn-sm mr1" type="submit">Kirjaudu</button>
+        <a class="btn btn-primary btn-sm"   href="{% url 'password_reset' %}">Unohditko salasanan?</a>
+        </div>
+    </form>
+    </center>
+
+{% endblock %}

@@ -1,0 +1,86 @@
+<!-- templates/base.html (Layout) -->
+<!-- Path: E:\Koodi\DJANGO\kauppatoriapp\templates\base.html -->
+
+{% load static %} 
+
+<!DOCTYPE html>
+<html lang="fi"> 
+
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Farmer's Market{% endblock %}</title>
+
+  <!-- Bootswatch CSS -->
+  <link href="{% static 'css/spacelab.css' %}" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="{% static 'css/customcss.css' %}" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+
+
+<body class="bgnd">
+  <!-- Navigointi -->
+  <nav class="navbar navbar-expand-lg navbar-dark topnav">
+    <a class="navbar-brand font" href="{% url 'home' %}">Maalaispalsta</a>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+
+          <a class="nav-link btn btn-secondary text-white" href="{% url 'home' %}">Etusivulle</a>
+
+        <div style="margin-left:20rem" >
+          
+        {% if user.is_authenticated %}
+        <h5>Kirjautuneena: {{ user.username }} </h5>
+        
+        </div>
+        {% endif %}
+
+
+      <!-- Omat ilmoitukset -->
+      {% if user.is_authenticated %}
+
+        <div style="margin-left:50rem">
+          
+        <ul class="navbar-nav">
+         
+            <a class="btn btn-info btn-sm"  href="{% url 'my_ads' %}">Omat ilmoitukset</a>
+    
+            <a class="btn btn-info btn-sm" href="{% url 'create_ad' %}">Luo ilmoitus</a>
+       
+            <a class="btn btn-info btn-sm" href="{% url 'password_change' %}">Password Change</a>
+       
+            <form action="{% url 'logout' %}" method="post" class="form-inline">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger">Log Out</button>
+            </form>
+       
+        {% else %}
+
+        <div class="btn-group" style="margin-left:70rem">
+         
+            <a type="button" class="btn btn-secondary text-white" href="{% url 'signup' %}" >Luo tunnukset</a>
+        
+            <a type="button" class="btn btn-secondary text-white" href="{% url 'login' %}">Kirjaudu</a>
+        
+            <a type="button" class="btn btn-secondary text-white" href="{% url 'admin:index' %}" target="_blank">Admin</a>
+        
+        </div>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container mt-4" >
+    <!-- Rendereöinti -->
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

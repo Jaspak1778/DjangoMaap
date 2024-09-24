@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Sinun luomat ilmoitukset</h2>
+  <hr>
+
+  {% if ads %}
+    {% for ad in ads %}
+      <div class="card mb-3">
+        <div class="card-body">
+
+          {% if ad.image %}
+          <img class="card-img-top col-sm-6" style="height: 200px; width:215px;" src="{{ ad.image.url }}" alt="Card image cap">
+        {% else %}
+          <p>No image available</p>
+        {% endif %}
+
+          <h3>{{ ad.title }}</h3>
+          <p>{{ ad.description }}</p>
+          <p>Price: €{{ ad.price }}</p>
+          <p>Created on: {{ ad.created_at }}</p>
+          <p>{{ contact_info }}</p>
+
+ 
+
+          <a href="{% url 'edit_ad' ad.id %}" class="btn btn-primary">Muokkaa</a> <!-- Edit-->
+          <a href="{% url 'delete_ad' ad.id %}" class="btn btn-danger">Poista</a>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>Et ole luonut yhtään ilmoitusta vielä..</p>
+  {% endif %}
+{% endblock %}

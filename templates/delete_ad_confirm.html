@@ -1,0 +1,14 @@
+<!-- delete_ad_confirm.html -->
+<!--path: E:\Koodi\DJANGO\kauppatoriapp\templates\delete_ad.html-->
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Delete Ad</h2>
+  <p>Are you sure you want to delete "{{ ad.title }}"?</p>
+
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Yes, delete</button>
+    <a href="{% url 'my_ads' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+{% endblock %}

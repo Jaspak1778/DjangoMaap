@@ -1,0 +1,52 @@
+
+<!-- templates/base.html (Layout) -->
+<!-- Path: E:\Koodi\DJANGO\kauppatoriapp\templates\base.html -->
+
+{% load static %} <!-- Load static files for CSS -->
+
+<!DOCTYPE html>
+<html lang="fi"> <!-- Set the language to Finnish -->
+
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Farmer's Market{% endblock %}</title>
+
+  <!-- Bootswatch CSS -->
+  <link href="{% static 'css/spacelab.css' %}" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="{% static 'css/customcss.css' %}" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+
+
+<nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}">Maalaispalsta</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor03">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'home' %}">Home</a>
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+ 
+      </ul>
+
+      <!-- Search Form -->
+      <form class="d-flex">
+                {{ search_form }}
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+
+    </div>
+  </div>
+</nav>

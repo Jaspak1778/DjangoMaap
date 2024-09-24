@@ -1,0 +1,17 @@
+<!---Luo ilmoitus-->
+<!--Create_ad.html-->
+
+<!--E:\Koodi\DJANGO\kauppatoriapp\templates\create_ad.html-->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Luo ilmoitus</h2>
+<form method="post" enctype="multipart/form-data">  <!-- Lisää enctype -->
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Lähetä</button>
+</form>
+
+{% endblock %}
